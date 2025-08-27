@@ -20,6 +20,10 @@ The provider comes in two parts:
    - (b) A POT generation script, and has command line options for the plugin to invoke (needs to transpile the script)
 2. **Provider plugin**: uses POT plugin framework to retrieve data from the provider, allowing yt-dlp to simulate having passed the 'bot check'.
 
+## Supported Clients
+
+This provider only provides PO tokens for WEB clients, i.e: `web, mweb, web_remix.` See the full list of WEB clients [here](https://github.com/yt-dlp/yt-dlp/blob/master/yt_dlp/extractor/youtube/pot/utils.py).
+
 ## Installation
 
 ### Base Requirements
