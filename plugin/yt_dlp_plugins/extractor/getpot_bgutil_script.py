@@ -113,12 +113,12 @@ class BgUtilScriptPTPBase(BgUtilPTPBase, abc.ABC):
         try:
             output, _, returncode = Popen.run(
                 [jsrt_path, '--version'], text=True, stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=5.0)
+                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=self._GET_SCRIPT_VSN_TIMEOUT)
             output = output.strip()
         except subprocess.TimeoutExpired:
             self.logger.debug(
                 f'Failed to check {self._JSRT_NAME} version: {self._JSRT_NAME} process '
-                'did not finish in 5.0 seconds', once=True)
+                'did not finish in {_GET_SCRIPT_VSN_TIMEOUT} seconds', once=True)
             return None
         except FileNotFoundError:
             self.logger.debug(
