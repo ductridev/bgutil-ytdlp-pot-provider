@@ -180,7 +180,7 @@ export class SessionManager {
                 },
             });
 
-            (window.document.referrer as any)[PropertySymbol.referrer] =
+            (window.document as any)[PropertySymbol.referrer] =
                 "https://www.youtube.com/";
 
             Object.assign(globalThis, {
