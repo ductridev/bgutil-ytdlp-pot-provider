@@ -11,7 +11,7 @@ import {
 } from "bgutils-js";
 import { Agent } from "node:https";
 import { ProxyAgent } from "proxy-agent";
-import { Window } from "happy-dom";
+import { PropertySymbol, Window } from "happy-dom";
 import { Innertube, Context as InnertubeContext } from "youtubei.js";
 
 interface YoutubeSessionData {
@@ -179,6 +179,9 @@ export class SessionManager {
                     },
                 },
             });
+
+            (window.document.referrer as any)[PropertySymbol.referrer] =
+                "https://www.youtube.com/";
 
             Object.assign(globalThis, {
                 window,
@@ -418,8 +421,16 @@ export class SessionManager {
             const method = (options?.method || "GET").toUpperCase();
             for (let attempts = 1; attempts <= maxRetries; attempts++) {
                 try {
+                    const baseHeaders = options?.headers || {};
+                    const headers = {
+                        ...baseHeaders,
+                        Referer:
+                            baseHeaders.Referer ||
+                            baseHeaders.referer ||
+                            "https://www.youtube.com/",
+                    };
                     const axiosOpt: AxiosRequestConfig = {
-                        headers: options?.headers,
+                        headers,
                         params: options?.params,
                         httpsAgent: proxySpec.asDispatcher(logger),
                     };
