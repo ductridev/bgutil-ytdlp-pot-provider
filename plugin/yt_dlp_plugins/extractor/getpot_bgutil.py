@@ -55,7 +55,8 @@ class BgUtilPTPBase(PoTokenProvider, abc.ABC):
 
     @staticmethod
     def _resolve_script_path(*ps: str):
-        return os.path.abspath(
+        # realpath resolves symlinks and internally calls abspath
+        return os.path.realpath(
             os.path.expanduser(os.path.expandvars(os.path.join(*ps))))
 
     def _script_path_provided(self) -> str | None:
