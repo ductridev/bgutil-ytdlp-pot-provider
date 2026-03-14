@@ -22,7 +22,7 @@ from yt_dlp_plugins.extractor.getpot_bgutil import BgUtilPTPBase
 @register_provider
 class BgUtilHTTPPTP(BgUtilPTPBase):
     PROVIDER_NAME = 'bgutil:http'
-    DEFAULT_BASE_URL = 'http://127.0.0.1:4416'
+    DEFAULT_BASE_URL = 'http://localhost:4416'
     _GET_SERVER_VSN_TIMEOUT = 5.0
 
     def __init__(self, *args, **kwargs):
