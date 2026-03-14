@@ -17,25 +17,24 @@ const httpServer = express();
 httpServer.use(express.json());
 httpServer.use(express.urlencoded({ extended: true }));
 
-httpServer
-    .listen(
-        {
-            host: BIND_HOST,
-            port: PORT_NUMBER,
-        },
-        (err) => {
-            if (err) {
-                console.error(
-                    `Could not listen on ${BIND_HOST}:${PORT_NUMBER} (Caused by ${strerror(err)})`,
-                );
-                process.exit(1);
-            } else {
-                console.log(
-                    `Started POT server (v${VERSION}) on address ${BIND_HOST}:${PORT_NUMBER}`,
-                );
-            }
-        },
-    );
+httpServer.listen(
+    {
+        host: BIND_HOST,
+        port: PORT_NUMBER,
+    },
+    (err) => {
+        if (err) {
+            console.error(
+                `Could not listen on ${BIND_HOST}:${PORT_NUMBER} (Caused by ${strerror(err)})`,
+            );
+            process.exit(1);
+        } else {
+            console.log(
+                `Started POT server (v${VERSION}) on address ${BIND_HOST}:${PORT_NUMBER}`,
+            );
+        }
+    },
+);
 
 const sessionManager = new SessionManager();
 httpServer.get("/", async (request, response) => {
