@@ -3,11 +3,15 @@ import { strerror, VERSION } from "./utils.ts";
 import { Command } from "commander";
 import express from "express";
 
-const program = new Command().option("-p, --port <PORT>").parse();
+const program = new Command()
+    .option("-p, --port <PORT>", "Port number to listen on", parseInt, 4416)
+    .option("-b, --bind <HOST>", "Bind address", "localhost")
+    .parse();
 
 const options = program.opts();
 
-const PORT_NUMBER = options.port || 4416;
+const PORT_NUMBER = options.port;
+const BIND_HOST = options.bind;
 
 const httpServer = express();
 httpServer.use(express.json());
@@ -16,42 +20,22 @@ httpServer.use(express.urlencoded({ extended: true }));
 httpServer
     .listen(
         {
-            host: "::",
+            host: BIND_HOST,
             port: PORT_NUMBER,
         },
         (err) => {
             if (err) {
                 console.error(
-                    `Could not listen on [::]:${PORT_NUMBER}, falling back to 0.0.0.0 (Caused by ${strerror(err)})`,
+                    `Could not listen on ${BIND_HOST}:${PORT_NUMBER} (Caused by ${strerror(err)})`,
                 );
+                process.exit(1);
             } else {
                 console.log(
-                    `Started POT server (v${VERSION}) on on address [::]:${PORT_NUMBER}`,
+                    `Started POT server (v${VERSION}) on address ${BIND_HOST}:${PORT_NUMBER}`,
                 );
             }
         },
-    )
-    .on("error", () => {
-        // ipv4 only systems might not be able to bind to "::", so we try 0.0.0.0 instead
-        // this is temporary as we plan to bind to localhost in the next major version
-        httpServer.listen(
-            {
-                host: "0.0.0.0",
-                port: PORT_NUMBER,
-            },
-            (err) => {
-                if (err) {
-                    console.error(
-                        `Could not listen on [::]:${PORT_NUMBER} (Caused by ${strerror(err)})`,
-                    );
-                } else {
-                    console.log(
-                        `Started POT server (v${VERSION}) on address 0.0.0.0:${PORT_NUMBER}`,
-                    );
-                }
-            },
-        );
-    });
+    );
 
 const sessionManager = new SessionManager();
 httpServer.get("/", async (request, response) => {

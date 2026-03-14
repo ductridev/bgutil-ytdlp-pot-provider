@@ -82,6 +82,7 @@ deno run --allow-env --allow-net --allow-ffi=. --allow-read=. ../src/main.ts [OP
 
 **Server Command Line Options**
 
+- `-b, --bind <HOST>`: The address to bind the server to. Defaults to `localhost`.
 - `-p, --port <PORT>`: The port on which the server listens.
 
 #### (b) Generation Script Option
@@ -108,7 +109,7 @@ python3 -m pip install -U bgutil-ytdlp-pot-provider
 
 ## Usage
 
-If using option (a) HTTP Server for the provider, and the default IP/port number (http://127.0.0.1:4416), you can use yt-dlp like normal 🙂.
+If using option (a) HTTP Server for the provider, and the default IP/port number (http://localhost:4416), you can use yt-dlp like normal 🙂.
 
 If changing the port or IP used for the provider server, pass it to yt-dlp via `base_url`
 
