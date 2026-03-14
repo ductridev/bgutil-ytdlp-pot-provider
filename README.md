@@ -55,8 +55,8 @@ python3 -m pip install -U bgutil-ytdlp-pot-provider
 
 ### Manual
 
-1. Download `bgutil-ytdlp-pot-provider.zip` from the latest release.
-2. Install it by placing the zip into one of the yt-dlp plugin folders.
+1. Download [`bgutil-ytdlp-pot-provider.zip`](https://github.com/Brainicism/bgutil-ytdlp-pot-provider/releases/latest/download/bgutil-ytdlp-pot-provider.zip) from [the latest release](https://github.com/Brainicism/bgutil-ytdlp-pot-provider/releases/latest).
+2. Install it by placing the zip into one of the [yt-dlp plugin folders](https://github.com/yt-dlp/yt-dlp#installing-plugins).
 
 ## Usage
 If you installed the script in the default location (`~/bgutil-ytdlp-pot-provider`) like the instructions earlier, you're good to go! `yt-dlp` will now automatically invoke the script to grab a PO token when needed.
