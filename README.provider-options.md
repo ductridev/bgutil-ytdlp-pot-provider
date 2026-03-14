@@ -1,6 +1,6 @@
 # HTTP Server Method
 
-This document covers the HTTP server provider setup. Use this method for higher concurrency or when you want a long-running provider service.
+This document covers the HTTP server provider setup. Use this method for higher concurrency or when you want a long-running provider service. The server listens on port 4416 by default.
 
 ## Base Requirements
 
@@ -18,8 +18,6 @@ Our Docker image comes in two flavors: Node.js or Deno. The `:latest` tag defaul
 > Note that the docker container's network is isolated from your local network by default. If you are using a local proxy server, it will not be accessible from within the container unless you pass `--net=host` as well.
 
 ## Option B: Native HTTP Server
-
-This is a HTTP server, listening on port 4416 by default.
 
 ### Install
 ```shell
