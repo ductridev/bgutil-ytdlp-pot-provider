@@ -22,7 +22,6 @@ Our Docker image comes in two flavors: Node.js or Deno. The `:latest` tag defaul
 This is a HTTP server, listening on port 4416 by default.
 
 ### Install
-
 ```shell
 # Replace 1.3.1 with the latest version or the one that matches the plugin
 git clone --single-branch --branch 1.3.1 https://github.com/Brainicism/bgutil-ytdlp-pot-provider.git
@@ -48,6 +47,8 @@ Deno:
 cd node_modules
 deno run --allow-env --allow-net --allow-ffi=. --allow-read=. ../src/main.ts
 ```
+
+Make sure either `node` or `deno` is available in your `PATH`. Otherwise, use the yt-dlp option `--js-runtimes RUNTIME:PATH` to pass the path. `--no-js-runtimes` does NOT prevent the plugin from using the JavaScript runtime. The argument is only used to retrieve the path to the runtime.
 
 ### Server Command Line Options
 

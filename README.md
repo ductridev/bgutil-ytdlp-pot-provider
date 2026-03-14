@@ -41,7 +41,7 @@ deno install --allow-scripts=npm:canvas --frozen
 And we're done! 
 
 > [!NOTE]
-> If you have high concurrency use cases, use the HTTP server method instead. See `README.provider-options.md` for the server setup.
+> If you have high concurrency use cases, use the HTTP server method instead. See [README.provider-options.md](README.provider-options.md) for the server setup.
 
 ## Install the plugin
 
