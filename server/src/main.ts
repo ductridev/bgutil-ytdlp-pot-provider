@@ -4,14 +4,14 @@ import { Command } from "commander";
 import express from "express";
 
 const program = new Command()
-    .option("-p, --port <PORT>", "Port number to listen on", parseInt, 4416)
-    .option("-b, --bind <HOST>", "Bind address", "localhost")
+    .option("-p, --port <PORT>", "Port number to listen on")
+    .option("-b, --bind <HOST>", "Bind address")
     .parse();
 
 const options = program.opts();
 
-const PORT_NUMBER = options.port;
-const BIND_HOST = options.bind;
+const PORT_NUMBER = options.port || 4416;
+const BIND_HOST = options.bind || "localhost";
 
 const httpServer = express();
 httpServer.use(express.json());
