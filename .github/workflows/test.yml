@@ -233,7 +233,7 @@ jobs:
         run: |
           exit_code=0
           ping() {
-            until curl -o- --silent --fail http://127.0.0.1:${{ env.PORT }}/ping 2>&1; do
+            until curl -o- --silent --fail http://localhost:${{ env.PORT }}/ping 2>&1; do
               sleep ${1:-0.5}
             done
           }
@@ -292,7 +292,7 @@ jobs:
           echo "::endgroup::"
 
           # check that the server is returning a POT
-          pot_response=$(curl -s -X POST "http://127.0.0.1:${{ env.PORT }}/get_pot")
+          pot_response=$(curl -s -X POST "http://localhost:${{ env.PORT }}/get_pot")
           echo "::group::Get pot response from the HTTP server"
           if echo "$pot_response" | jq -e . >/dev/null 2>&1; then
             echo "$pot_response" | jq -C
@@ -312,7 +312,7 @@ jobs:
           # expect this to fail, but just make sure that the plugin is invoked
           {
             server_response=$(./yt-dlp ${{ env.TEST_ARGS }} --extractor-args \
-              "youtubepot-bgutilhttp:base_url=http://127.0.0.1:${{ env.PORT }}" dQw4w9WgXcQ 2>&1)
+              "youtubepot-bgutilhttp:base_url=http://localhost:${{ env.PORT }}" dQw4w9WgXcQ 2>&1)
             ret=$?
           } || true
 
